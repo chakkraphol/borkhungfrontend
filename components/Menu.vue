@@ -2,19 +2,21 @@
 <template>
   <div>
     <ul>
-      <li>
+      <li class="menu">
         <a :class="active == 'Round' ? 'active' : null" href="/rounds"
           >รอบการเล่น</a
         >
       </li>
-      <li>
+      <li class="menu">
         <a :class="active == 'Member' ? 'active' : null" href="/members"
           >สมาชิก</a
         >
       </li>
-      <li><a href="3.html">รายการการเดิมพันตามรอบ</a></li>
-      <li><a href="4.html">รายการการเดิมพันตามรายบุคคล</a></li>
-      <li style="float: right"><a href="#" @click="logout">ออกจากระบบ</a></li>
+      <li class="menu"><a href="3.html">รายการการเดิมพันตามรอบ</a></li>
+      <li class="menu"><a href="4.html">รายการการเดิมพันตามรายบุคคล</a></li>
+      <li class="menu" style="float: right">
+        <a href="#" @click="logout">ออกจากระบบ</a>
+      </li>
     </ul>
   </div>
 </template>

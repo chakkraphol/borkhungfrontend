@@ -5,7 +5,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-axios.defaults.timeout = 2000;
+axios.defaults.timeout = 20000;
 
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -23,6 +23,7 @@ router.post("/login", (req, res) => {
       });
     });
 });
+
 router.post("/getmember", (req, res) => {
   const { start, limit } = req.body;
   axios
@@ -50,6 +51,48 @@ router.post("/getround", (req, res) => {
         start: req.body.start,
         limit: req.body.limit,
       },
+      headers: { token: req.headers.token },
+    })
+    .then((result) => {
+      return res.json(result.data);
+    })
+    .catch((err) => {
+      return res.status(200).json({
+        message: err,
+      });
+    });
+});
+router.post("/getroundbyid", (req, res) => {
+  axios
+    .get(`${process.env.BASE_API_URL}/round/` + req.body.id, {
+      headers: { token: req.headers.token },
+    })
+    .then((result) => {
+      return res.json(result.data);
+    })
+    .catch((err) => {
+      return res.status(200).json({
+        message: err,
+      });
+    });
+});
+router.post("/getmemberall", (req, res) => {
+  axios
+    .get(`${process.env.BASE_API_URL}/member/all`, {
+      headers: { token: req.headers.token },
+    })
+    .then((result) => {
+      return res.json(result.data);
+    })
+    .catch((err) => {
+      return res.status(200).json({
+        message: err,
+      });
+    });
+});
+router.post("/addround", (req, res) => {
+  axios
+    .post(`${process.env.BASE_API_URL}/round`, req.body, {
       headers: { token: req.headers.token },
     })
     .then((result) => {

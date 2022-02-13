@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       start: 0,
-      limit: 20,
+      limit: process.env.LIMIT_PAGE || 20,
       round: [],
       page: 1,
       startpage: 0,

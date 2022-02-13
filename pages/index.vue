@@ -1,5 +1,5 @@
 <template>
-  <Login />
+  <client-only><Login /></client-only>
 </template>
 
 <script>

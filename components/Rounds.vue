@@ -3,7 +3,9 @@
     <div class="row"><Menu active="Round" /></div>
     <div class="row mt-4">
       <div class="container col-md-11">
-        <button type="button" class="btn btn-success">+ เพิ่มรอบ</button>
+        <a href="/addrounds">
+          <button type="button" class="btn btn-success">+ เพิ่มรอบ</button></a
+        >
       </div>
     </div>
     <div class="row mt-4">
@@ -65,7 +67,7 @@ export default {
   data() {
     return {
       start: 0,
-      limit: 20,
+      limit: process.env.LIMIT_PAGE || 20,
       round: [],
       page: 1,
       startpage: 0,
@@ -84,7 +86,7 @@ export default {
             start: this.start,
             limit: this.limit,
           },
-          this.setHeaders()
+          this.$setHeaders(sessionStorage.getItem("token"))
         )
         .then((result) => {
           this.page =
@@ -94,15 +96,7 @@ export default {
           this.round = result.result.data;
         });
     },
-    setHeaders() {
-      return {
-        headers: {
-          /*'cache-control': 'no-cache',*/
-          "content-type": "application/json",
-          token: sessionStorage.getItem("token"),
-        },
-      };
-    },
+
     changepage(e) {
       window.location.href = "/rounds?page=" + e.target.value;
     },

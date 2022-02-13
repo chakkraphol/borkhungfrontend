@@ -5,6 +5,7 @@ export default {
     htmlAttrs: {
       lang: "en",
     },
+
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -22,13 +23,15 @@ export default {
       src: "~/plugins/func.js",
       mode: "client",
     },
+    { src: "~/plugins/vue-datepicker", mode: "client" },
+    { src: "~/plugins/vue-select.js", ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["nuxt-bootstrap"],
+  buildModules: ["nuxt-bootstrap", "@nuxtjs/dotenv"],
   axios: {
     baseURL: "http://localhost:8000",
     proxyHeaders: false,
