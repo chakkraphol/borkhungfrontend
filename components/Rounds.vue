@@ -14,8 +14,7 @@
           <tr>
             <th>ชื่อรอบ</th>
             <th>วันที่</th>
-            <th>ยอดเดิมพัน</th>
-            <th>จำนวนผู้เดิมพัน</th>
+            <th>น้ำหนักที่ออก</th>
             <th>อัตราค่าน้ำ</th>
             <th>สถานะ</th>
             <th>รายละเอียด</th>
@@ -26,12 +25,11 @@
           <tr v-for="(data, key) in round" :key="key">
             <td>{{ data.name }}</td>
             <td>{{ data.date }}</td>
-            <td>25000</td>
-            <td>10</td>
-            <td>0.6</td>
+            <td>{{ data.weight }}</td>
+            <td>{{ data.rate }}%</td>
             <td>{{ data.status == "1" ? "กำลังเดิมพัน" : "จบการเดิมพัน" }}</td>
-            <td><a href="1.html">เดิมพัน</a></td>
-            <td><a href="editgroup.html">แก้ไข</a></td>
+            <td><a :href="`bet/${data.id}`">เดิมพัน</a></td>
+            <td><a :href="`round/${data.id}`">แก้ไข</a></td>
           </tr>
         </table>
       </div>

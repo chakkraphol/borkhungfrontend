@@ -43,8 +43,9 @@
                 <button
                   v-on:click.stop.prevent="submit"
                   class="btn btn-login w-100"
+                  v-if="status == 1"
                 >
-                  เพิ่มรอบ
+                  แก้ไขรอบ
                 </button>
               </div>
             </div>
@@ -70,6 +71,7 @@ export default {
       validate_name: false,
       validate_rate: false,
       loading: false,
+      status: null,
     };
   },
   methods: {
@@ -78,31 +80,51 @@ export default {
         this.validate_name = true;
         return;
       }
-      if (!this.rate_bet || !this.rate_bet.trim() || this.rate_bet > 100) {
+      if (!this.rate_bet || this.rate_bet > 100) {
         this.validate_rate = true;
         return;
       }
       this.loading = true;
       this.$axios
         .$post(
-          "/api/addround",
+          "/api/updateround",
           {
             name: this.name,
             date: new Date(this.date_today)
               .toLocaleString("sv")
               .substring(0, 10),
             rate: this.rate_bet,
+            id: this.$route.params.id,
           },
           this.$setHeaders(sessionStorage.getItem("token"))
         )
         .then((result) => {
-          if (result.result.id) {
-            window.location.href = "/bet/" + result.result.id;
+          window.location.href = "/rounds";
+        });
+    },
+    getData() {
+      this.$axios
+        .$post(
+          "/api/getroundbyid",
+          {
+            id: this.$route.params.id,
+          },
+          this.$setHeaders(sessionStorage.getItem("token"))
+        )
+        .then((result) => {
+          if (result.result.data.length) {
+            this.name = result.result.data[0].name;
+            this.date_today = result.result.data[0].date;
+            this.rate_bet = result.result.data[0].rate;
+            this.status = result.result.data[0].status;
           } else {
             window.location.href = "/rounds";
           }
         });
     },
+  },
+  mounted() {
+    this.getData();
   },
 };
 </script>

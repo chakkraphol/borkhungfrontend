@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loading v-if="loading" />
-    <div class="row"><Menu active="Round" /></div>
+    <div class="row"><Menu active="Member" /></div>
 
     <div class="container mt-5">
       <div class="row d-flex justify-content-center">
@@ -9,7 +9,7 @@
           <div class="card px-5 py-5 form" id="form1">
             <div class="form-data">
               <div class="forms-inputs mb-4">
-                <span>ชื่อรอบ</span>
+                <span>ชื่อลูกค้า</span>
                 <input
                   autocomplete="off"
                   type="text"
@@ -20,23 +20,21 @@
                 />
               </div>
               <div class="forms-inputs mb-4">
-                <span>วันที่</span>
-                <date-picker
-                  placeholder="DD/MM/YYYY"
-                  format="dd/MM/yyyy"
-                  inputClass="form-control"
-                  v-model="date_today"
+                <span>ชื่อ Line</span>
+                <input
+                  autocomplete="off"
+                  type="text"
+                  class="form-control"
+                  v-model="line"
                 />
               </div>
               <div class="forms-inputs mb-4">
-                <span>ค่าน้ำ</span>
+                <span>เบอร์โทร</span>
                 <input
                   autocomplete="off"
                   type="number"
                   class="form-control"
-                  :class="validate_rate ? 'is-invalids' : ''"
-                  v-model="rate_bet"
-                  @change="validate_rate = false"
+                  v-model="mobile"
                 />
               </div>
               <div class="mb-3">
@@ -44,7 +42,7 @@
                   v-on:click.stop.prevent="submit"
                   class="btn btn-login w-100"
                 >
-                  เพิ่มรอบ
+                  เพิ่มสมาชิก
                 </button>
               </div>
             </div>
@@ -64,42 +62,35 @@ export default {
   },
   data() {
     return {
-      date_today: new Date(),
-      rate_bet: process.env.RATE_BET || 10,
       name: null,
+      line: null,
+      mobile: null,
       validate_name: false,
-      validate_rate: false,
       loading: false,
     };
   },
   methods: {
     submit() {
-      if (!this.name || !this.name.trim()) {
+      if (!this.name) {
         this.validate_name = true;
-        return;
-      }
-      if (!this.rate_bet || !this.rate_bet.trim() || this.rate_bet > 100) {
-        this.validate_rate = true;
         return;
       }
       this.loading = true;
       this.$axios
         .$post(
-          "/api/addround",
+          "/api/addmember",
           {
             name: this.name,
-            date: new Date(this.date_today)
-              .toLocaleString("sv")
-              .substring(0, 10),
-            rate: this.rate_bet,
+            linename: this.line,
+            mobile: this.mobile,
           },
           this.$setHeaders(sessionStorage.getItem("token"))
         )
         .then((result) => {
-          if (result.result.id) {
-            window.location.href = "/bet/" + result.result.id;
+          if (result.result.name) {
+            window.location.href = "/members";
           } else {
-            window.location.href = "/rounds";
+            alert("!!! Error ");
           }
         });
     },

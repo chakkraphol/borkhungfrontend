@@ -12,8 +12,20 @@
           >สมาชิก</a
         >
       </li>
-      <li class="menu"><a href="3.html">รายการการเดิมพันตามรอบ</a></li>
-      <li class="menu"><a href="4.html">รายการการเดิมพันตามรายบุคคล</a></li>
+      <li class="menu">
+        <a
+          :class="active == 'ReportRound' ? 'active' : null"
+          href="/reportround"
+          >รายการการเดิมพันตามรอบ</a
+        >
+      </li>
+      <li class="menu">
+        <a
+          :class="active == 'ReportMember' ? 'active' : null"
+          href="/reportmember"
+          >รายการการเดิมพันตามรายบุคคล</a
+        >
+      </li>
       <li class="menu" style="float: right">
         <a href="#" @click="logout">ออกจากระบบ</a>
       </li>

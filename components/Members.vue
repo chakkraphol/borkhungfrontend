@@ -3,7 +3,11 @@
     <div class="row"><Menu active="Member" /></div>
     <div class="row mt-4">
       <div class="container col-md-11">
-        <button type="button" class="btn btn-success">+ เพิ่มสมาชิก</button>
+        <a href="/addmember">
+          <button type="button" class="btn btn-success">
+            + เพิ่มสมาชิก
+          </button></a
+        >
       </div>
     </div>
     <div class="row mt-4">
@@ -14,7 +18,6 @@
             <th>ชื่อสมาชิก</th>
             <th>Line</th>
             <th>เบอร์โทร</th>
-            <th>สถานะ</th>
             <th>แก้ไข</th>
           </tr>
 
@@ -23,8 +26,7 @@
             <td>{{ data.name }}</td>
             <td>{{ data.linename }}</td>
             <td>{{ data.mobile }}</td>
-            <td>{{ data.status_admin == 1 ? "ผู้ดูแลระบบ" : "สมาชิก" }}</td>
-            <td><a href="editgroup.html">แก้ไข</a></td>
+            <td><a :href="`member/${data.id}`">แก้ไข</a></td>
           </tr>
         </table>
       </div>

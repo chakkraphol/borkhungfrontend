@@ -33,7 +33,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ["nuxt-bootstrap", "@nuxtjs/dotenv"],
   axios: {
-    baseURL: "http://localhost:8000",
+    baseURL: process.env.HOST || "http://localhost:3000",
     proxyHeaders: false,
     credentials: false,
   },
