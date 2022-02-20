@@ -268,7 +268,7 @@ export default {
       round_date: null,
       round_name: null,
       price: 0,
-      rate_bet: 10,
+      rate_bet: 0,
       bet: 0,
       validate_bet_member_even: false,
       validate_bet_member_odd: false,
@@ -497,6 +497,9 @@ export default {
               : 0;
             this.status_bet = result.result.data[0].status
               ? result.result.data[0].status
+              : 0;
+            this.rate_bet = result.result.data[0].rate
+              ? result.result.data[0].rate
               : 0;
             this.getBet(1);
             this.getBet(2);
