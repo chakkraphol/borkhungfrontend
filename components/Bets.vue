@@ -522,10 +522,7 @@ export default {
             for (let member in result.result.data) {
               memberarray.push({
                 code: result.result.data[member].id,
-                label:
-                  result.result.data[member].name +
-                  "/" +
-                  result.result.data[member].linename,
+                label: result.result.data[member].name,
               });
             }
           }

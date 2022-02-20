@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mt-5 text-center">
-      <h3>วันที่ {{ $convertDate($route.query.round_date) }}</h3>
+      <h1>วันที่ {{ $convertDate($route.query.round_date) }}</h1>
     </div>
     <div class="row mt-4">
       <div class="col-md-12 d-flex justify-content-center">
