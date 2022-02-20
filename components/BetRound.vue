@@ -127,7 +127,10 @@ export default {
       let rate = sessionStorage.getItem("sumratesumround");
       sessionStorage.setItem("sumratesumround", 0);
       let showratesumround =
-        parseFloat(sessionStorage.getItem("sumratesumall")) + parseFloat(rate);
+        sessionStorage.getItem("sumratesumall") == 0
+          ? rate
+          : parseFloat(sessionStorage.getItem("sumratesumall")) +
+            parseFloat(rate);
       sessionStorage.setItem("sumratesumall", showratesumround);
       return rate;
     },
