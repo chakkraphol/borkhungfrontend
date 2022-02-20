@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import "vue-select/dist/vue-select.css";
 export default {
   data() {
     return {

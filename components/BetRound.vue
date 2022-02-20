@@ -33,8 +33,7 @@
               </td>
               <td>
                 <span v-if="data.bet_result == 1">คี่</span
-                ><span v-if="data.bet_result == 2">คู่</span
-                ><span v-else>รอผล</span>
+                ><span v-if="data.bet_result == 2">คู่</span>
               </td>
               <td>{{ data.rate_bet }}%</td>
               <td>{{ sumbetcal(data.price) }}</td>
