@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      date: null,
+      date: new Date(),
       validate_date: false,
       round: [],
       round_id: null,
@@ -98,6 +98,9 @@ export default {
           this.round = memberarray;
         });
     },
+  },
+  mounted() {
+    this.getround();
   },
 };
 </script>

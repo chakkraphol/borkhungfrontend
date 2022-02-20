@@ -15,10 +15,11 @@
             <th>ราคา</th>
             <th>ลบ</th>
             <th>บวก</th>
+            <th>ค่าน้ำ</th>
           </tr>
           <client-only v-for="(data, key) in member_round" :key="key">
             <tr style="background-color: #a9a9a9">
-              <td colspan="8" v-if="chdkround(data.round_id)">
+              <td colspan="9" v-if="chdkround(data.round_id)">
                 รอบ {{ data.round_name }}
               </td>
             </tr>
@@ -59,6 +60,7 @@
                   +{{ sumplusbetcal(data.price, data.rate_bet) }}</span
                 >
               </td>
+              <td>{{ showrate() }}</td>
             </tr>
             <tr v-if="chksum(key, data.round_id)">
               <td>รวม</td>
@@ -69,6 +71,7 @@
               <td>{{ showsumbet() }}</td>
               <td style="color: #ff0000">{{ showsumrubbet() }}</td>
               <td style="color: #008000">{{ showsumplusbet() }}</td>
+              <td>{{ showratesumround() }}</td>
             </tr>
           </client-only>
         </table>
@@ -80,6 +83,7 @@
             <th>ราคา</th>
             <th>ลบ</th>
             <th>บวก</th>
+            <th>ค่าน้ำ</th>
           </tr>
           <tr>
             <td>รวม</td>
@@ -87,6 +91,7 @@
             <td>{{ showsumbetday() }}</td>
             <td style="color: #ff0000">{{ showsumrubbetday() }}</td>
             <td style="color: #008000">{{ showsumplusbetday() }}</td>
+            <td style="color: #008000">{{ showratesumall() }}</td>
           </tr>
         </table>
       </div>
@@ -113,6 +118,17 @@ export default {
     };
   },
   methods: {
+    showratesumall() {
+      return this.$formatPrice(sessionStorage.getItem("sumratesumall"));
+    },
+    showratesumround() {
+      let rate = sessionStorage.getItem("sumratesumround");
+      sessionStorage.setItem("sumratesumround", 0);
+      let showratesumround =
+        parseFloat(sessionStorage.getItem("sumratesumall")) + parseFloat(rate);
+      sessionStorage.setItem("sumratesumall", showratesumround);
+      return this.$formatPrice(rate);
+    },
     showsumbetday() {
       return this.$formatPrice(sessionStorage.getItem("sumbetall"));
     },
@@ -123,12 +139,23 @@ export default {
       return this.$formatPrice(sessionStorage.getItem("sumplusbetall"));
     },
     sumplusbetcal(price, rate_bet) {
-      let data = price - (price * rate_bet) / 100;
+      let rate = (price * rate_bet) / 100;
+      let data = price - rate;
       let sumbet = data + parseInt(sessionStorage.getItem("sumplusbetround"));
       let sumbetall = data + parseInt(sessionStorage.getItem("sumplusbetall"));
       sessionStorage.setItem("sumplusbetround", sumbet);
+      sessionStorage.setItem("sumrateround", rate);
       sessionStorage.setItem("sumplusbetall", sumbetall);
       return this.$formatPrice(data);
+    },
+    showrate() {
+      let rate = sessionStorage.getItem("sumrateround");
+      sessionStorage.setItem("sumrateround", 0);
+      let showratesumround =
+        parseFloat(sessionStorage.getItem("sumratesumround")) +
+        parseFloat(rate);
+      sessionStorage.setItem("sumratesumround", showratesumround);
+      return this.$formatPrice(rate);
     },
     sumrubbetcal(price) {
       let sumbet = price + parseInt(sessionStorage.getItem("sumrubbetround"));
@@ -200,20 +227,7 @@ export default {
         )
         .then((result) => {
           if (result.result.data.length) {
-            let round_id = -1;
-            let chk_round_id = 0;
             this.member_round = result.result.data;
-            /*
-            Object.entries(result.result.data).forEach(([key, value]) => {
-              if (chk_round_id != value.round_id) {
-                round_id++;
-                chk_round_id = value.round_id;
-                this.member_round.push(value);
-              }
-            });
-            */
-            console.log(this.member_round);
-            //this.memberbet = r;
           }
         });
     },
@@ -228,6 +242,8 @@ export default {
     sessionStorage.setItem("sumrubbetall", 0);
     sessionStorage.setItem("sumplusbetround", 0);
     sessionStorage.setItem("sumplusbetall", 0);
+    sessionStorage.setItem("sumratesumround", 0);
+    sessionStorage.setItem("sumratesumall", 0);
   },
 };
 </script>

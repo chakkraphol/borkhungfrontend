@@ -55,7 +55,7 @@ export default {
     return {
       memberlist: [],
       member: null,
-      date: null,
+      date: new Date(),
       validate_member: false,
       validate_date: false,
       round: [],
@@ -142,6 +142,7 @@ export default {
     },
   },
   mounted() {
+    this.getround();
     this.getMember();
   },
 };

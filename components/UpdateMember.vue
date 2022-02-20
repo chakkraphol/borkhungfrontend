@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       name: null,
-      line: null,
+      line: "",
       mobile: null,
       validate_name: false,
       loading: false,

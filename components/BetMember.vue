@@ -64,6 +64,20 @@
             <td style="color: #ff0000">{{ $formatPrice(sumrub) }}</td>
             <td style="color: #008000">{{ $formatPrice(sumplus) }}</td>
           </tr>
+          <tr>
+            <td colspan="7">
+              สรุปยอด
+              <span v-if="sumplus >= sumrub"
+                ><span style="color: #008000"
+                  >+{{ $formatPrice(sumplus - sumrub) }}</span
+                ></span
+              ><span v-else
+                ><span style="color: #ff0000"
+                  >-{{ $formatPrice(sumrub - sumplus) }}</span
+                ></span
+              >
+            </td>
+          </tr>
         </table>
       </div>
     </div>

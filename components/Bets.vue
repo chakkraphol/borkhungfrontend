@@ -219,8 +219,8 @@
                 @change="validate_bet_result = false"
               >
                 <option value="">เลือกผลการเดิมพัน</option>
-                <option value="1">คู่</option>
-                <option value="2">คี่</option>
+                <option value="2">คู่</option>
+                <option value="1">คี่</option>
               </select>
             </div>
             <div class="forms-inputs mb-4">
