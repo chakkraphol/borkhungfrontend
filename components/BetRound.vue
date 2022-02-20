@@ -121,7 +121,7 @@ export default {
   },
   methods: {
     showratesumall() {
-      return this.$formatPrice(sessionStorage.getItem("sumratesumall"));
+      return sessionStorage.getItem("sumratesumall");
     },
     showratesumround() {
       let rate = sessionStorage.getItem("sumratesumround");
@@ -129,7 +129,7 @@ export default {
       let showratesumround =
         parseFloat(sessionStorage.getItem("sumratesumall")) + parseFloat(rate);
       sessionStorage.setItem("sumratesumall", showratesumround);
-      return this.$formatPrice(rate);
+      return rate;
     },
     showsumbetday() {
       return this.$formatPrice(sessionStorage.getItem("sumbetall"));
