@@ -127,7 +127,7 @@ export default {
       let rate = sessionStorage.getItem("sumratesumround");
       sessionStorage.setItem("sumratesumround", 0);
       let showratesumround =
-        sessionStorage.getItem("sumratesumall") == 0
+        parseFloat(sessionStorage.getItem("sumratesumall")) == 0
           ? rate
           : parseFloat(sessionStorage.getItem("sumratesumall")) +
             parseFloat(rate);
@@ -159,8 +159,9 @@ export default {
       let showratesumround =
         parseFloat(sessionStorage.getItem("sumratesumround")) +
         parseFloat(rate);
-      sessionStorage.setItem("sumratesumround", showratesumround);
-      return this.$formatPrice(rate);
+
+      sessionStorage.setItem("sumratesumround", parseFloat(showratesumround));
+      return rate;
     },
     sumrubbetcal(price) {
       let sumbet = price + parseInt(sessionStorage.getItem("sumrubbetround"));
@@ -247,6 +248,8 @@ export default {
     sessionStorage.setItem("sumrubbetall", 0);
     sessionStorage.setItem("sumplusbetround", 0);
     sessionStorage.setItem("sumplusbetall", 0);
+    sessionStorage.setItem("sumrateround", 0);
+
     sessionStorage.setItem("sumratesumround", 0);
     sessionStorage.setItem("sumratesumall", 0);
   },
