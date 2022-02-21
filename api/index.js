@@ -290,8 +290,9 @@ router.post("/delmember", (req, res) => {
     });
 });
 router.post("/delround", (req, res) => {
+  console.log(req.body);
   axios
-    .post(`${process.env.BASE_API_URL}/member/deletemember`, req.body, {
+    .post(`${process.env.BASE_API_URL}/round/deleteround`, req.body, {
       headers: { token: req.headers.token },
     })
     .then((result) => {

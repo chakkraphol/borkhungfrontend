@@ -93,7 +93,7 @@ export default {
             {
               id: id,
             },
-            this.setHeaders()
+            this.$setHeaders(sessionStorage.getItem("token"))
           )
           .then((result) => {
             this.getData();
@@ -112,7 +112,7 @@ export default {
             start: this.start,
             limit: this.limit,
           },
-          this.setHeaders()
+          this.$setHeaders(sessionStorage.getItem("token"))
         )
         .then((result) => {
           this.page =
@@ -121,15 +121,6 @@ export default {
               : Math.ceil(parseInt(result.result.count) / this.limit);
           this.round = result.result.data;
         });
-    },
-    setHeaders() {
-      return {
-        headers: {
-          /*'cache-control': 'no-cache',*/
-          "content-type": "application/json",
-          token: sessionStorage.getItem("token"),
-        },
-      };
     },
     changepage(e) {
       window.location.href = "/members?page=" + e.target.value;

@@ -75,7 +75,7 @@ export default {
     };
   },
   methods: {
-    delmember(id) {
+    delround(id) {
       if (confirm("คุณแน่ใจที่จะทำการลบรอบการเดิมพันนี้") == true) {
         this.$axios
           .$post(
@@ -83,7 +83,7 @@ export default {
             {
               id: id,
             },
-            this.setHeaders()
+            this.$setHeaders(sessionStorage.getItem("token"))
           )
           .then((result) => {
             this.getData();
