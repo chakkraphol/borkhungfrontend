@@ -107,6 +107,19 @@
         <div class="col-md-12">
           <div class="card px-3 py-3 formdup">
             <div class="text-center">
+              <a
+                :href="`/bet/capture?id=${round_id}&token=${token}`"
+                target="_blank"
+                ><h3>แสดงรายการผู้เล่นของรอบนี้</h3></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5 text-left">
+        <div class="col-md-12">
+          <div class="card px-3 py-3 formdup">
+            <div class="text-center">
               <h1>
                 <span v-if="sum_bet_odd > sum_bet_even">หาคู่ </span>
                 <span v-if="sum_bet_odd < sum_bet_even">หาคี่ </span>

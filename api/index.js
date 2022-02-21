@@ -135,15 +135,9 @@ router.post("/delbet", (req, res) => {
 });
 router.post("/getbet", (req, res) => {
   axios
-    .get(
-      `${process.env.BASE_API_URL}/bet?round_id=` +
-        req.body.round_id +
-        "&bet=" +
-        req.body.bet,
-      {
-        headers: { token: req.headers.token },
-      }
-    )
+    .get(`${process.env.BASE_API_URL}/bet?${querystring.stringify(req.body)}`, {
+      headers: { token: req.headers.token },
+    })
     .then((result) => {
       return res.json(result.data);
     })
