@@ -95,7 +95,7 @@
           <div class="card px-3 py-3 formdup">
             <div class="text-center">
               <a
-                :href="`/reportresult?round_date=${round_date}&token=${token}`"
+                :href="`/bet/result?round_date=${round_date}&token=${token}`"
                 target="_blank"
                 ><h3>ดูผลย้อนหลัง</h3></a
               >
@@ -108,9 +108,9 @@
           <div class="card px-3 py-3 formdup">
             <div class="text-center">
               <h1>
-                <span v-if="sum_bet_odd > sum_bet_even">หาคู่</span>
-                <span v-if="sum_bet_odd < sum_bet_even">หาคี่</span
-                >{{ $formatPrice(caldup()) }}
+                <span v-if="sum_bet_odd > sum_bet_even">หาคู่ </span>
+                <span v-if="sum_bet_odd < sum_bet_even">หาคี่ </span>
+                {{ $formatPrice(caldup()) }}
               </h1>
             </div>
           </div>

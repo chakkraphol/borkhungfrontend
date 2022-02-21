@@ -53,7 +53,7 @@ export default {
           {
             date: this.$route.query.round_date,
           },
-          this.$setHeaders(sessionStorage.getItem("token"))
+          this.$setHeaders(this.$route.query.token)
         )
         .then((result) => {
           if (result.result.data.length) {
