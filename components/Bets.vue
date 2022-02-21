@@ -107,7 +107,11 @@
         <div class="col-md-12">
           <div class="card px-3 py-3 formdup">
             <div class="text-center">
-              <h1>ส่วนต่าง {{ $formatPrice(caldup()) }}</h1>
+              <h1>
+                <span v-if="sum_bet_odd > sum_bet_even">หาคู่</span>
+                <span v-if="sum_bet_odd < sum_bet_even">หาคี่</span
+                >{{ $formatPrice(caldup()) }}
+              </h1>
             </div>
           </div>
         </div>
