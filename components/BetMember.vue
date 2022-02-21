@@ -71,11 +71,11 @@
               สรุปยอด
               <span v-if="sumplus >= sumrub"
                 ><span style="color: #008000"
-                  >+{{ $formatPriceFloat(sumplus - sumrub) }}</span
+                  ><h1>+{{ $formatPriceFloat(sumplus - sumrub) }}</h1></span
                 ></span
               ><span v-else
                 ><span style="color: #ff0000"
-                  >-{{ $formatPriceFloat(sumrub - sumplus) }}</span
+                  ><h1>-{{ $formatPriceFloat(sumrub - sumplus) }}</h1></span
                 ></span
               >
             </td>

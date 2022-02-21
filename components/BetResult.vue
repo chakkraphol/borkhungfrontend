@@ -16,10 +16,10 @@
             <tr>
               <td>{{ key + 1 }}</td>
               <td>{{ data.name }}</td>
-              <td>
+              <td style="color: #008000">
                 <span v-if="data.bet_result == 2">{{ data.weight }}</span>
               </td>
-              <td>
+              <td style="color: #ff0000">
                 <span v-if="data.bet_result == 1">{{ data.weight }}</span>
               </td>
             </tr>
@@ -57,7 +57,7 @@ export default {
         )
         .then((result) => {
           if (result.result.data.length) {
-            this.round = result.result.data;
+            this.round = result.result.data.reverse();
           }
         });
     },

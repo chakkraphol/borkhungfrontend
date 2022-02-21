@@ -207,7 +207,7 @@
                 <table id="bettableeven" style="width: 100%">
                   <tr v-for="(data, key) in membertoday" :key="key">
                     <td>
-                      {{ key + 1 }} .
+                      {{ key + 1 }}.
                       <a
                         :href="`/bet/member?member_id=${data.member_id}&round_date=${round_date}&name=${data.member_name}&token=${token}`"
                         target="_blank"
