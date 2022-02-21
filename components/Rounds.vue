@@ -18,8 +18,8 @@
             <th>อัตราค่าน้ำ</th>
             <th>สถานะ</th>
             <th>รายละเอียด</th>
-
             <th>แก้ไขข้อมูล</th>
+            <th>ลบ</th>
           </tr>
 
           <tr v-for="(data, key) in round" :key="key">
@@ -30,6 +30,9 @@
             <td>{{ data.status == "1" ? "กำลังเดิมพัน" : "จบการเดิมพัน" }}</td>
             <td><a :href="`bet/${data.id}`">เดิมพัน</a></td>
             <td><a :href="`round/${data.id}`">แก้ไข</a></td>
+            <td>
+              <span @click="delround(data.id)" style="cursor: pointer">ลบ</span>
+            </td>
           </tr>
         </table>
       </div>
@@ -72,6 +75,21 @@ export default {
     };
   },
   methods: {
+    delmember(id) {
+      if (confirm("คุณแน่ใจที่จะทำการลบรอบการเดิมพันนี้") == true) {
+        this.$axios
+          .$post(
+            "/api/delround",
+            {
+              id: id,
+            },
+            this.setHeaders()
+          )
+          .then((result) => {
+            this.getData();
+          });
+      }
+    },
     getData() {
       this.start =
         this.$route.query.page > 1

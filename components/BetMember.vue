@@ -71,11 +71,11 @@
               สรุปยอด
               <span v-if="sumplus >= sumrub"
                 ><span style="color: #008000"
-                  >+{{ $formatPrice(sumplus - sumrub) }}</span
+                  >+{{ $formatPriceFloat(sumplus - sumrub) }}</span
                 ></span
               ><span v-else
                 ><span style="color: #ff0000"
-                  >-{{ $formatPrice(sumrub - sumplus) }}</span
+                  >-{{ $formatPriceFloat(sumrub - sumplus) }}</span
                 ></span
               >
             </td>
@@ -153,7 +153,7 @@ export default {
     },
     cal(price, rate_bet) {
       let data = price - (price * rate_bet) / 100;
-      return this.$formatPrice(data);
+      return this.$formatPriceFloat(data);
     },
   },
 

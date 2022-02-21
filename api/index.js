@@ -168,7 +168,6 @@ router.post("/getmembertoday", (req, res) => {
     });
 });
 router.post("/getbetmember", (req, res) => {
-  console.log(querystring.stringify(req.body));
   axios
     .get(
       `${process.env.BASE_API_URL}/bet/member?${querystring.stringify(
@@ -188,7 +187,6 @@ router.post("/getbetmember", (req, res) => {
     });
 });
 router.post("/updateresult", (req, res) => {
-  console.log(req.body.weight);
   axios
     .post(`${process.env.BASE_API_URL}/round/updateresult`, req.body, {
       headers: { token: req.headers.token },
@@ -203,7 +201,6 @@ router.post("/updateresult", (req, res) => {
     });
 });
 router.post("/roundgetbydate", (req, res) => {
-  console.log(req.body.weight);
   axios
     .get(
       `${process.env.BASE_API_URL}/round/getbydate?${querystring.stringify(
@@ -267,6 +264,34 @@ router.post("/updatemember", (req, res) => {
 router.post("/updateround", (req, res) => {
   axios
     .post(`${process.env.BASE_API_URL}/round/update`, req.body, {
+      headers: { token: req.headers.token },
+    })
+    .then((result) => {
+      return res.json(result.data);
+    })
+    .catch((err) => {
+      return res.status(200).json({
+        message: err,
+      });
+    });
+});
+router.post("/delmember", (req, res) => {
+  axios
+    .post(`${process.env.BASE_API_URL}/member/deletemember`, req.body, {
+      headers: { token: req.headers.token },
+    })
+    .then((result) => {
+      return res.json(result.data);
+    })
+    .catch((err) => {
+      return res.status(200).json({
+        message: err,
+      });
+    });
+});
+router.post("/delround", (req, res) => {
+  axios
+    .post(`${process.env.BASE_API_URL}/member/deletemember`, req.body, {
       headers: { token: req.headers.token },
     })
     .then((result) => {

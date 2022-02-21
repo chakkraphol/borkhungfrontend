@@ -26,6 +26,13 @@
           >รายการการเดิมพันตามรายบุคคล</a
         >
       </li>
+      <li class="menu">
+        <a
+          :class="active == 'ReportResult' ? 'active' : null"
+          href="/reportresult"
+          >ดูน้ำหนักที่ออก</a
+        >
+      </li>
       <li class="menu" style="float: right">
         <a href="#" @click="logout">ออกจากระบบ</a>
       </li>

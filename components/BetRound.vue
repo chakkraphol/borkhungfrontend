@@ -121,7 +121,7 @@ export default {
   },
   methods: {
     showratesumall() {
-      return sessionStorage.getItem("sumratesumall");
+      return this.$formatPriceFloat(sessionStorage.getItem("sumratesumall"));
     },
     showratesumround() {
       let rate = sessionStorage.getItem("sumratesumround");
@@ -132,7 +132,7 @@ export default {
           : parseFloat(sessionStorage.getItem("sumratesumall")) +
             parseFloat(rate);
       sessionStorage.setItem("sumratesumall", showratesumround);
-      return rate;
+      return this.$formatPriceFloat(rate);
     },
     showsumbetday() {
       return this.$formatPrice(sessionStorage.getItem("sumbetall"));
@@ -147,11 +147,12 @@ export default {
       let rate = (price * rate_bet) / 100;
       let data = price - rate;
       let sumbet = data + parseInt(sessionStorage.getItem("sumplusbetround"));
-      let sumbetall = data + parseInt(sessionStorage.getItem("sumplusbetall"));
+      let sumbetall =
+        data + parseFloat(sessionStorage.getItem("sumplusbetall"));
       sessionStorage.setItem("sumplusbetround", sumbet);
       sessionStorage.setItem("sumrateround", rate);
       sessionStorage.setItem("sumplusbetall", sumbetall);
-      return this.$formatPrice(data);
+      return this.$formatPriceFloat(data);
     },
     showrate() {
       let rate = sessionStorage.getItem("sumrateround");
@@ -161,7 +162,7 @@ export default {
         parseFloat(rate);
 
       sessionStorage.setItem("sumratesumround", parseFloat(showratesumround));
-      return rate;
+      return this.$formatPriceFloat(rate);
     },
     sumrubbetcal(price) {
       let sumbet = price + parseInt(sessionStorage.getItem("sumrubbetround"));

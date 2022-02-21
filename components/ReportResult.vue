@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row"><Menu active="ReportRound" /></div>
+    <div class="row"><Menu active="ReportResult" /></div>
     <div class="container mt-5">
       <div class="row d-flex justify-content-center">
         <div class="col-md-6">
@@ -15,14 +15,6 @@
                   :class="validate_date ? 'is-invalids' : ''"
                   v-model="date"
                 />
-              </div>
-              <div class="forms-inputs mb-4">
-                <span>รอบ</span>
-                <v-select
-                  :options="round"
-                  style="background: #fff"
-                  v-model="round_id"
-                ></v-select>
               </div>
               <div class="mb-3">
                 <button
@@ -68,12 +60,10 @@ export default {
         .substring(0, 10);
 
       window.open(
-        "bet/round?round_date=" +
+        "bet/result?round_date=" +
           round_date +
           "&token=" +
-          sessionStorage.getItem("token") +
-          "&round_id=" +
-          round
+          sessionStorage.getItem("token")
       );
     },
     getround() {

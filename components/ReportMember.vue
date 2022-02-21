@@ -101,7 +101,7 @@ export default {
         .$post(
           "/api/roundgetbydate",
           {
-            date: new Date(this.date).toISOString().substring(0, 10),
+            date: new Date(this.date).toLocaleString("sv").substring(0, 10),
           },
           this.$setHeaders(sessionStorage.getItem("token"))
         )

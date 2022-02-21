@@ -24,4 +24,11 @@ export default ({ app, store, req, res }, inject) => {
     price = parseInt(price);
     return price ? price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0;
   });
+  inject("formatPriceFloat", (price) => {
+    if (!price) {
+      return price;
+    }
+    price = parseFloat(price);
+    return price ? price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") : 0;
+  });
 };

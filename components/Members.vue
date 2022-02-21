@@ -19,14 +19,28 @@
             <th>Line</th>
             <th>เบอร์โทร</th>
             <th>แก้ไข</th>
+            <th>ลบ</th>
           </tr>
 
           <tr v-for="(data, key) in round" :key="key">
             <td>{{ key + 1 }}</td>
-            <td>{{ data.name }}</td>
+            <td>
+              <a
+                :href="`/bet/member?member_id=${data.id}&round_date=${date_today}&name=${data.name}&token=${token}`"
+                target="_blank"
+                >{{ data.name }}</a
+              >
+            </td>
             <td>{{ data.linename }}</td>
             <td>{{ data.mobile }}</td>
-            <td><a :href="`member/${data.id}`">แก้ไข</a></td>
+            <td>
+              <a :href="`member/${data.id}`">แก้ไข</a>
+            </td>
+            <td>
+              <span @click="delmember(data.id)" style="cursor: pointer"
+                >ลบ</span
+              >
+            </td>
           </tr>
         </table>
       </div>
@@ -65,10 +79,27 @@ export default {
       limit: process.env.LIMIT_PAGE || 20,
       round: [],
       page: 1,
+      date_today: new Date().toLocaleString("sv").substring(0, 10),
       startpage: 0,
+      token: sessionStorage.getItem("token"),
     };
   },
   methods: {
+    delmember(id) {
+      if (confirm("คุณแน่ใจที่จะทำการลบการสมาชิกท่านนี้") == true) {
+        this.$axios
+          .$post(
+            "/api/delmember",
+            {
+              id: id,
+            },
+            this.setHeaders()
+          )
+          .then((result) => {
+            this.getData();
+          });
+      }
+    },
     getData() {
       this.start =
         this.$route.query.page > 1

@@ -94,6 +94,19 @@
         <div class="col-md-12">
           <div class="card px-3 py-3 formdup">
             <div class="text-center">
+              <a
+                :href="`/reportresult?round_date=${round_date}&token=${token}`"
+                target="_blank"
+                ><h3>ดูผลย้อนหลัง</h3></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5 text-left">
+        <div class="col-md-12">
+          <div class="card px-3 py-3 formdup">
+            <div class="text-center">
               <h1>ส่วนต่าง {{ $formatPrice(caldup()) }}</h1>
             </div>
           </div>
