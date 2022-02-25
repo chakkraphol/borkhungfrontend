@@ -18,11 +18,14 @@
             <th>ค่าน้ำ</th>
           </tr>
           <client-only v-for="(data, key) in member_round" :key="key">
-            <tr style="background-color: #a9a9a9">
-              <td colspan="9" v-if="chdkround(data.round_id)">
-                รอบ {{ data.round_name }}
-              </td>
-            </tr>
+            <client-only v-if="chdkround(data.round_id)">
+              <tr v-if="key > 0" style="background-color: #ffffff">
+                <td colspan="9">&nbsp;</td>
+              </tr>
+              <tr style="background-color: #ffd700">
+                <td colspan="9">รอบ {{ data.round_name }}</td>
+              </tr>
+            </client-only>
             <tr>
               <td>{{ key + 1 }}</td>
               <td style="text-align: left">{{ data.member_name }}</td>
@@ -141,12 +144,12 @@ export default {
       return this.$formatPrice(sessionStorage.getItem("sumrubbetall"));
     },
     showsumplusbetday() {
-      return this.$formatPrice(sessionStorage.getItem("sumplusbetall"));
+      return this.$formatPriceFloat(sessionStorage.getItem("sumplusbetall"));
     },
     sumplusbetcal(price, rate_bet) {
       let rate = (price * rate_bet) / 100;
       let data = price - rate;
-      let sumbet = data + parseInt(sessionStorage.getItem("sumplusbetround"));
+      let sumbet = data + parseFloat(sessionStorage.getItem("sumplusbetround"));
       let sumbetall =
         data + parseFloat(sessionStorage.getItem("sumplusbetall"));
       sessionStorage.setItem("sumplusbetround", sumbet);
@@ -165,8 +168,9 @@ export default {
       return this.$formatPriceFloat(rate);
     },
     sumrubbetcal(price) {
-      let sumbet = price + parseInt(sessionStorage.getItem("sumrubbetround"));
-      let sumbetall = price + parseInt(sessionStorage.getItem("sumrubbetall"));
+      let sumbet = price + parseFloat(sessionStorage.getItem("sumrubbetround"));
+      let sumbetall =
+        price + parseFloat(sessionStorage.getItem("sumrubbetall"));
       sessionStorage.setItem("sumrubbetall", sumbetall);
       sessionStorage.setItem("sumrubbetround", sumbet);
       return this.$formatPrice(price);
@@ -174,7 +178,7 @@ export default {
     showsumplusbet() {
       let sumbetrond = sessionStorage.getItem("sumplusbetround");
       sessionStorage.setItem("sumplusbetround", 0);
-      return this.$formatPrice(sumbetrond);
+      return this.$formatPriceFloat(sumbetrond);
     },
     showsumrubbet() {
       let sumbetrond = sessionStorage.getItem("sumrubbetround");

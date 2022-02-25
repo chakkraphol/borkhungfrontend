@@ -28,7 +28,7 @@
                   v-model="date_today"
                 />
               </div>
-              <div class="forms-inputs mb-4">
+              <div class="forms-inputs mb-4" v-if="status == 1">
                 <span>ค่าน้ำ</span>
                 <input
                   autocomplete="off"
@@ -43,7 +43,6 @@
                 <button
                   v-on:click.stop.prevent="submit"
                   class="btn btn-login w-100"
-                  v-if="status == 1"
                 >
                   แก้ไขรอบ
                 </button>

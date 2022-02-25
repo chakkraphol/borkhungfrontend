@@ -7,94 +7,83 @@
       <div class="row mt-2 text-center">
         <h1>รอบ {{ round_name }}</h1>
       </div>
-      <div class="row mt-5 text-left">
-        <div class="col-md-6">
-          <div class="card px-3 py-3 form">
-            <div class="text-center">
-              <h1>คู่</h1>
-            </div>
-            <table id="bettableeven">
-              <tr style="background-color: #feff83">
-                <th style="width: 50px">ลำดับ</th>
-                <th style="width: 150px">ชื่อ</th>
-                <th style="width: 150px">ยอด</th>
+      <table width="400" align="center">
+        <tr>
+          <td style="vertical-align: top">
+            <table width="200">
+              <tr>
+                <td colspan="2" align="center" bgcolor="#ADFF2F">คู่</td>
+              </tr>
+
+              <tr bgcolor="#FFD700">
+                <td width="100" align="center">ชื่อ</td>
+                <td align="center">ยอด</td>
               </tr>
               <tr v-for="(data, key) in bet_even_data" :key="key">
-                <td style="width: 50px; text-align: center">{{ key + 1 }}</td>
-                <td style="width: 150px">{{ data.member_name }}</td>
-                <td style="width: 150px; text-align: center">
-                  {{ $formatPrice(data.price) }}
-                </td>
+                <td width="100" align="center">{{ data.member_name }}</td>
+                <td align="center">{{ $formatPrice(data.price) }}</td>
               </tr>
               <client-only v-if="length_even < length_odd">
                 <tr v-for="length_even in length_odd - length_even">
-                  <td style="width: 50px; text-align: center">&nbsp;</td>
-                  <td style="width: 150px">&nbsp;</td>
-                  <td style="width: 150px; text-align: center">&nbsp;</td>
+                  <td width="100" align="center">&nbsp;</td>
+                  <td align="center"></td>
                 </tr>
               </client-only>
-              <tr>
-                <td style="width: 50px; text-align: center">รวม</td>
-                <td style="width: 150px"></td>
-                <td style="width: 150px; text-align: center">
-                  {{ $formatPrice(sum_bet_even) }}
-                </td>
+              <tr bgcolor="#00CED1">
+                <td width="100" align="center">รวม</td>
+                <td align="center">{{ $formatPrice(sum_bet_even) }}</td>
               </tr>
             </table>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card px-3 py-3 form">
-            <div class="text-center">
-              <h1>คี่</h1>
-            </div>
-            <table id="bettableeven">
-              <tr style="background-color: #feff83">
-                <th style="width: 50px">ลำดับ</th>
-                <th style="width: 150px">ชื่อ</th>
-                <th style="width: 150px">ยอด</th>
+          </td>
+          <td style="vertical-align: top">
+            <table width="200">
+              <tr>
+                <td colspan="2" align="center" bgcolor="#FF0000">คี่</td>
               </tr>
+
+              <tr bgcolor="#FFD700">
+                <td width="100" align="center">ชื่อ</td>
+                <td align="center">ยอด</td>
+              </tr>
+
               <tr v-for="(data, key) in bet_odd_data" :key="key">
-                <td style="width: 50px; text-align: center">{{ key + 1 }}</td>
-                <td style="width: 150px">{{ data.member_name }}</td>
-                <td style="width: 150px; text-align: center">
-                  {{ $formatPrice(data.price) }}
-                </td>
+                <td width="100" align="center">{{ data.member_name }}</td>
+                <td align="center">{{ $formatPrice(data.price) }}</td>
               </tr>
               <client-only v-if="length_odd < length_even">
                 <tr v-for="length_odd in length_even - length_odd">
-                  <td style="width: 50px; text-align: center">&nbsp;</td>
-                  <td style="width: 150px">&nbsp;</td>
-                  <td style="width: 150px; text-align: center">&nbsp;</td>
+                  <td width="100" align="center">&nbsp;</td>
+                  <td align="center"></td>
                 </tr>
               </client-only>
-              <tr>
-                <td style="width: 50px; text-align: center">รวม</td>
-                <td style="width: 150px"></td>
-                <td style="width: 150px; text-align: center">
-                  {{ $formatPrice(sum_bet_odd) }}
-                </td>
+              <tr bgcolor="#00CED1">
+                <td width="100" align="center">รวม</td>
+                <td align="center">{{ $formatPrice(sum_bet_odd) }}</td>
               </tr>
             </table>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-5 text-center">
-        <div class="col-md-12">
-          <h1 style="color: #008000">
-            <span v-if="bet_result == 1">คี่</span>
-            <span v-if="bet_result == 2">คู่</span>
-            <span v-if="bet_result != 1 && bet_result != 2">รอผล</span>
-          </h1>
-        </div>
-      </div>
-      <div class="row mt-5 text-center">
-        <div class="col-md-12">
-          <h1 style="color: #ff0000">
-            ** รบกวนตรวจสอบยอด ชั่งแล้วผลได้ผลเสียยึดตามตารางเท่านั้น **
-          </h1>
-        </div>
-      </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <div align="center">
+              <h3>
+                <font color="#FF0000"
+                  >** รบกวนตรวจสอบยอด ชั่งแล้วผลได้ผลเสียยึดตามตารางเท่านั้น
+                  **</font
+                >
+              </h3>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#BA55D3" align="center"><h2>ผล</h2></td>
+          <td align="center" bgcolor="#00FA9A">
+            <h2>{{ bet_result }}</h2>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -142,7 +131,6 @@ export default {
             } else {
               this.round_date = result.result.data[0].round_date;
               this.round_name = result.result.data[0].round_name;
-              this.bet_result = result.result.data[0].bet_result;
               this.length_even = result.result.data.length;
               this.bet_even_data = result.result.data;
               this.sum_bet_even = result.result.data.reduce(function (
@@ -163,29 +151,43 @@ export default {
         return this.sum_bet_even - this.sum_bet_odd;
       }
     },
+    getRound() {
+      this.$axios
+        .$post(
+          "/api/getroundbyid",
+          {
+            id: this.$route.query.id,
+          },
+          this.$setHeaders(this.$route.query.token)
+        )
+        .then((result) => {
+          if (result.result.data.length) {
+            this.bet_result =
+              result.result.data[0].weight != null
+                ? this.$formatPrice(result.result.data[0].weight)
+                : "รอผล";
+          }
+        });
+    },
   },
 
   mounted() {
     this.getBet(1);
     this.getBet(2);
+    this.getRound();
   },
 };
 </script>
 <style lang="scss" scoped>
-.btn-login {
-  background-color: #4caf50;
-  color: #ffffff;
+table,
+td,
+th {
+  border: 1px solid;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-#bettableeven th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  border: 1px solid #ddd;
-  color: #000;
-}
-#bettableeven td {
-  border: 1px solid #ddd;
-  padding: 8px;
+table {
+  border-collapse: collapse;
 }
 </style>

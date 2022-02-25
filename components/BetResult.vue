@@ -3,30 +3,111 @@
     <div class="row mt-5 text-center">
       <h1>วันที่ {{ $convertDate($route.query.round_date) }}</h1>
     </div>
-    <div class="row mt-4">
-      <div class="col-md-12 d-flex justify-content-center">
-        <table id="table" style="width: 60%">
+
+    <table width="600px" align="center">
+      <tr>
+        <td
+          width="300px"
+          v-if="round.slice(0, 20).length"
+          style="vertical-align: top"
+        >
           <tr>
-            <th style="width: 10px">ลำดับ</th>
-            <th style="width: 200px">รอบ</th>
-            <th>คู่</th>
-            <th>คี่</th>
+            <td width="100" bgcolor="#FFD700" align="center">
+              <strong>รอบ</strong>
+            </td>
+            <td width="100" bgcolor="#7FFFD4" align="center">
+              <strong>คู่</strong>
+            </td>
+            <td width="100" bgcolor="#DC143C" align="center">
+              <strong>คี่</strong>
+            </td>
           </tr>
-          <client-only v-for="(data, key) in round" :key="key">
-            <tr>
-              <td>{{ key + 1 }}</td>
-              <td>{{ data.name }}</td>
-              <td style="color: #008000">
-                <span v-if="data.bet_result == 2">{{ data.weight }}</span>
-              </td>
-              <td style="color: #ff0000">
-                <span v-if="data.bet_result == 1">{{ data.weight }}</span>
-              </td>
-            </tr>
-          </client-only>
-        </table>
-      </div>
-    </div>
+
+          <tr v-for="(data, key) in round.slice(0, 20)" :key="key">
+            <td bgcolor="#FFD700" align="center">{{ data.name }}</td>
+            <td
+              align="center"
+              :bgcolor="data.bet_result == 2 ? '#7FFFD4' : '#ffffff'"
+            >
+              <span v-if="data.bet_result == 2">{{ data.weight }}</span>
+            </td>
+            <td
+              align="center"
+              :bgcolor="data.bet_result == 1 ? '#DC143C' : '#ffffff'"
+            >
+              <span v-if="data.bet_result == 1">{{ data.weight }}</span>
+            </td>
+          </tr>
+        </td>
+        <td
+          width="300px"
+          v-if="round.slice(20, 40).length"
+          style="vertical-align: top"
+        >
+          <tr>
+            <td width="100" bgcolor="#FFD700" align="center">
+              <strong>รอบ</strong>
+            </td>
+            <td width="100" bgcolor="#7FFFD4" align="center">
+              <strong>คู่</strong>
+            </td>
+            <td width="100" bgcolor="#DC143C" align="center">
+              <strong>คี่</strong>
+            </td>
+          </tr>
+
+          <tr v-for="(data, key) in round.slice(20, 40)" :key="key">
+            <td bgcolor="#FFD700" align="center">{{ data.name }}</td>
+            <td
+              align="center"
+              :bgcolor="data.bet_result == 2 ? '#7FFFD4' : '#ffffff'"
+            >
+              <span v-if="data.bet_result == 2">{{ data.weight }}</span>
+            </td>
+            <td
+              align="center"
+              :bgcolor="data.bet_result == 1 ? '#DC143C' : '#ffffff'"
+            >
+              <span v-if="data.bet_result == 1">{{ data.weight }}</span>
+            </td>
+          </tr>
+        </td>
+        <td
+          width="300px"
+          v-if="round.slice(40, 60).length"
+          style="vertical-align: top"
+        >
+          <tr>
+            <td width="100" bgcolor="#FFD700" align="center">
+              <strong>รอบ</strong>
+            </td>
+            <td width="100" bgcolor="#7FFFD4" align="center">
+              <strong>คู่</strong>
+            </td>
+            <td width="100" bgcolor="#DC143C" align="center">
+              <strong>คี่</strong>
+            </td>
+          </tr>
+
+          <tr v-for="(data, key) in round.slice(40, 60)" :key="key">
+            <td bgcolor="#FFD700" align="center">{{ data.name }}</td>
+            <td
+              align="center"
+              :bgcolor="data.bet_result == 2 ? '#7FFFD4' : '#ffffff'"
+            >
+              <span v-if="data.bet_result == 2">{{ data.weight }}</span>
+            </td>
+            <td
+              align="center"
+              :bgcolor="data.bet_result == 1 ? '#DC143C' : '#ffffff'"
+            >
+              <span v-if="data.bet_result == 1">{{ data.weight }}</span>
+            </td>
+          </tr>
+        </td>
+      </tr>
+    </table>
+
     <div class="mt-4 text-center">
       <span onclick="window.print()" style="cursor: pointer">
         <img src="~/assets/images/print.svg" width="50" />
@@ -68,3 +149,15 @@ export default {
   },
 };
 </script>
+<style scoped>
+table,
+td,
+th {
+  border: 1px solid;
+  font-size: 30px;
+}
+
+table {
+  border-collapse: collapse;
+}
+</style>
